@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const CreateBlog = props => {
-  const initialData = { id: null, title: "", content: "" };
-  const [blog, setBlog] = useState(initialData);
+const UpdateBlog = props => {
+  const [blog, setBlog] = useState(props.currentBlog);
 
   const onInputChange = event => {
     const { name, value } = event.target;
@@ -15,15 +14,15 @@ const CreateBlog = props => {
     props.setActiveModal({ active: false });
   };
 
+  useEffect(() => {
+    setBlog(props.currentBlog);
+  }, [props]);
+
   return (
     <form
       onSubmit={event => {
         event.preventDefault();
-        if (!blog.title || !blog.content) {
-          alert("Please fill Title and Content !");
-          return;
-        }
-        props.createBlog(blog);
+        props.updateBlog(blog.id, blog);
       }}
     >
       <div className="form-group">
@@ -45,7 +44,7 @@ const CreateBlog = props => {
         />
       </div>
       <div className="form-group form-group--actions">
-        <button className="primary-btn">Create</button>
+        <button className="primary-btn">Update</button>
         <button className="cancel-btn" onClick={cancel}>
           Cancel
         </button>
@@ -54,4 +53,4 @@ const CreateBlog = props => {
   );
 };
 
-export default CreateBlog;
+export default UpdateBlog;

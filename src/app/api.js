@@ -25,5 +25,10 @@ function getUpdatedBlog(id, blog) {
 
   return response;
 }
+function getDeatilBlog(id) {
+  const response = axios.get(`https://api-placeholder.herokuapp.com/api/v1/blogs/${id}`);
 
-export { getBlogs, getCreatedBlog, getUpdatedBlog};
+  return response;
+}
+
+export { getBlogs, getCreatedBlog, getUpdatedBlog, getDeatilBlog};

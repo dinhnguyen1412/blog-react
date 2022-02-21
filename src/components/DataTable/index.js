@@ -48,17 +48,17 @@ const DataTable = props => {
         <tbody>
           {props.users.length ? (
             props.users.map(blog => (
-              <tr key={blog.id}>
-                <td className="field-avatar">
+              <tr key={blog.id} class="list-unstyled">
+                <td className="field-avatar media">
                   <img
                     src={blog.image.url ? blog.image.url : PlaceholderImg}
                     alt={blog.id}
                   />
                 </td>
-                <td>{blog.id}</td>
-                <td>{blog.title}</td>
-                <td>{blog.content}</td>
-                <td className="field-actions">
+                <td class="media">{blog.id}</td>
+                <td class="media">{blog.title}</td>
+                <td class="media">{blog.content}</td>
+                <td className="field-actions media">
                   <button
                     className="primary-btn"
                     onClick={() => {

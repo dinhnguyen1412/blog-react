@@ -22,6 +22,10 @@ const UpdateBlog = props => {
     <form
       onSubmit={event => {
         event.preventDefault();
+        if (!blog.title || !blog.content) {
+          alert("Please fill Title and Content !");
+          return;
+        }
         props.updateBlog(blog.id, blog);
       }}
     >

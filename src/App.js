@@ -4,7 +4,6 @@ import {
   getBlogs,
   getCreatedBlog,
   getUpdatedBlog
-  // getDeletedUser
 } from "./app/api";
 
 // Styles
@@ -136,7 +135,7 @@ function App() {
     });
   };
 
-  const updatedBlog = async (id, updatedBlog) => {
+  const updateBlog = async (id, updatedBlog) => {
     setActiveModal(false);
     setLoading(true);
 
@@ -234,7 +233,7 @@ function App() {
           {activeModal.name === "Update Blog" && (
             <UpdateBlog
               currentBlog={currentBlog}
-              updatedBlog={updatedBlog}
+              updateBlog={updateBlog}
               setActiveModal={setActiveModal}
             />
           )}
