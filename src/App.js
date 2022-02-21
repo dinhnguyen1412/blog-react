@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getBlogs,
   getCreatedBlog,
-  getUpdatedBlog
+  getUpdatedBlog,
+  getDeatilBlog
 } from "./app/api";
 
 // Styles
@@ -66,9 +67,9 @@ function App() {
         )
       );
 
-      dispatch({ type: "SET_USERS", data: results });
+      dispatch({ type: "SET_BLOGS", data: results });
     } else if (!term.length) {
-      dispatch({ type: "SET_USERS", data: savedUsers });
+      dispatch({ type: "SET_BLOGS", data: savedUsers });
     }
   };
 
@@ -82,7 +83,7 @@ function App() {
             ? a.id.localeCompare(b.id, "tr")
             : b.id.localeCompare(a.id, "tr");
         });
-        dispatch({ type: "SET_USERS", data: nameSort });
+        dispatch({ type: "SET_BLOGS", data: nameSort });
         return;
       case "title":
         const surnameSort = [...savedUsers].sort((a, b) => {
@@ -90,7 +91,7 @@ function App() {
             ? a.title.localeCompare(b.title, "tr")
             : b.title.localeCompare(a.title, "tr");
         });
-        dispatch({ type: "SET_USERS", data: surnameSort });
+        dispatch({ type: "SET_BLOGS", data: surnameSort });
         return;
       default:
         break;
@@ -109,7 +110,7 @@ function App() {
           icon: "success",
           title: "Blog created successfully."
         }).then(() => {
-          dispatch({ type: "CREATE_USER", data: result });
+          dispatch({ type: "CREATE_BLOG", data: result });
           setSavedUsers([...users, result]);
         });
       });
@@ -147,7 +148,7 @@ function App() {
           title: "Blog updated successfully."
         }).then(() => {
           dispatch({
-            type: "SET_USERS",
+            type: "SET_BLOGS",
             data: users.map(user =>
               user.id === id ? Object.assign(user, result) : user
             )
@@ -171,7 +172,27 @@ function App() {
     try {
       await getBlogs().then(({ data }) => {
         setSavedUsers(data.data);
-        dispatch({ type: "SET_USERS", data: data.data });
+        dispatch({ type: "SET_BLOGS", data: data.data });
+      });
+    } catch (err) {
+      MySwal.fire({
+        icon: "error",
+        title: "Failed to fetch blogs."
+      });
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    }
+  };
+
+  const fetchDetail = async id => {
+    setLoading(true);
+
+    try {
+      await getDeatilBlog(id).then(({ data }) => {
+        setSavedUsers(data.data);
+        dispatch({ type: "SET_BLOGS", data: data.data });
       });
     } catch (err) {
       MySwal.fire({

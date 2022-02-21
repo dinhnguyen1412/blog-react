@@ -67,6 +67,12 @@ const DataTable = props => {
                   >
                     Update
                   </button>
+                  <button
+                    className="info-btn"
+                    onClick={() => props.detailRow(blog)}
+                  >
+                    Detail
+                  </button>
                 </td>
               </tr>
             ))

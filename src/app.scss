@@ -98,6 +98,15 @@ input {
   font-weight: 600;
   color: #fff;
 }
+.info-btn {
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: rgb(11, 190, 131) ;
+  border-radius: 5px;
+  font-weight: 600;
+  color: #fff;
+}
 
 .form-group {
   & + .form-group {

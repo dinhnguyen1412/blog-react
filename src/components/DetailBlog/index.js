@@ -19,38 +19,11 @@ const UpdateBlog = props => {
   }, [props]);
 
   return (
-    <form
-      onSubmit={event => {
-        event.preventDefault();
-        props.updateBlog(blog.id, blog);
-      }}
-    >
-      <div className="form-group">
-        <label>Title</label>
-        <input
-          type="text"
-          name="title"
-          value={blog.title}
-          onChange={onInputChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Content</label>
-        <input
-          type="text"
-          name="content"
-          value={blog.content}
-          onChange={onInputChange}
-        />
-      </div>
-      <div className="form-group form-group--actions">
-        <button className="primary-btn">Update</button>
-        <button className="cancel-btn" onClick={cancel}>
-          Cancel
-        </button>
-      </div>
-    </form>
-  );
+    <div>
+        <h1>{blog.title}</h1>
+        <p>{blog.content}</p>
+    </div>
+)
 };
 
 export default UpdateBlog;
